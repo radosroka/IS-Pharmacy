@@ -1,9 +1,16 @@
 {block content}
     {foreach $medicine as $med}
-    <div class="post">
-        <h2>{$med->id_sukl}</h2>
-
-        <div>{$med->nazov}</div>
+    <div class="row">
+    	<div class="col-sm-2 col-sm-5cols">
+    		<div class="thumbnail">
+    			<img src="https://cdn1.iconfinder.com/data/icons/complete-medical-healthcare-icons-for-apps-and-web/128/medication-drugs1-512.png" alt="Some image">
+    		</div>
+    	</div>
+    	<div class="col-sm-4">
+    		<b>{$med->nazov}</b>
+    		<figcaption>{$med->id_sukl}</figcaption>
+    	</div>
+    	<div class="col-sm-4">{$med->cena}</div>
     </div>
     {/foreach}
 {/block}
