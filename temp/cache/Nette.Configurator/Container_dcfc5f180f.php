@@ -230,7 +230,7 @@ class Container_dcfc5f180f extends Nette\DI\Container
 	 */
 	public function createServiceApplication__3()
 	{
-		$service = new App\Presenters\HomepagePresenter;
+		$service = new App\Presenters\HomepagePresenter($this->getService('database.default.context'));
 		$service->injectPrimary($this, $this->getService('application.presenterFactory'),
 			$this->getService('routing.router'), $this->getService('http.request'),
 			$this->getService('http.response'), $this->getService('session.session'),
@@ -352,8 +352,8 @@ class Container_dcfc5f180f extends Nette\DI\Container
 	 */
 	public function createServiceDatabase__default__connection()
 	{
-		$service = new Nette\Database\Connection('mysql:host=127.0.0.1;dbname=test', NULL, NULL,
-			['lazy' => TRUE]);
+		$service = new Nette\Database\Connection('mysql:host=127.0.0.1;dbname=lekaren', 'root',
+			NULL, ['lazy' => TRUE]);
 		$this->getService('tracy.blueScreen')->addPanel('Nette\Bridges\DatabaseTracy\ConnectionPanel::renderException');
 		Nette\Database\Helpers::createDebugPanel($service, TRUE, 'default');
 		return $service;

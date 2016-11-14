@@ -5,65 +5,101 @@ use Latte\Runtime as LR;
 
 class Templatea1106f5151 extends Latte\Runtime\Template
 {
-	public $blocks = [
-		'head' => 'blockHead',
-		'scripts' => 'blockScripts',
-	];
-
-	public $blockTypes = [
-		'head' => 'html',
-		'scripts' => 'html',
-	];
-
 
 	function main()
 	{
 		extract($this->params);
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>Bootstrap 101 Template</title>
 
-	<title><?php
-		if (isset($this->blockQueue["title"])) {
-			$this->renderBlock('title', $this->params, function ($s, $type) {
-				$_fi = new LR\FilterInfo($type);
-				return LR\Filters::convertTo($_fi, 'html', $this->filters->filterContent('striphtml', $_fi, $s));
-			});
-			?> | <?php
-		}
-?>Nette Sandbox</title>
+	<!-- Bootstrap -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 
-	<link rel="stylesheet" href="<?php echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl($basePath)) /* line 12 */ ?>/css/style.css">
-	<meta name="viewport" content="width=device-width">
-	<?php
-		if ($this->getParentName()) return get_defined_vars();
-		$this->renderBlock('head', get_defined_vars());
-?>
-</head>
-
-<body>
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+  </head>
+  <body>
 <?php
 		$iterations = 0;
 		foreach ($flashes as $flash) {
-			?>	<div<?php if ($_tmp = array_filter(['flash', $flash->type])) echo ' class="', LR\Filters::escapeHtmlAttr(implode(" ", array_unique($_tmp))), '"' ?>><?php
-			echo LR\Filters::escapeHtmlText($flash->message) /* line 18 */ ?></div>
+			?>  	<div<?php if ($_tmp = array_filter(['flash', $flash->type])) echo ' class="', LR\Filters::escapeHtmlAttr(implode(" ", array_unique($_tmp))), '"' ?>><?php
+			echo LR\Filters::escapeHtmlText($flash->message) /* line 21 */ ?></div>
 <?php
 			$iterations++;
 		}
 ?>
 
+
+  	<!-- Static navbar -->
+  	<nav class="navbar navbar-default">
+  		<div class="container-fluid">
+  			<div class="navbar-header">
+  				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+  					<span class="sr-only">Toggle navigation</span>
+  					<span class="icon-bar"></span>
+  					<span class="icon-bar"></span>
+  					<span class="icon-bar"></span>
+  				</button>
+  				<a class="navbar-brand" href="#">Lekáreň</a>
+  			</div>
+  			<div id="navbar" class="navbar-collapse collapse">
+  				<ul class="nav navbar-nav">
+  					<li class="active"><a href="#">Domov</a></li>
+  					<li><a href="#">O Nás</a></li>
+  					<li><a href="#">Kontakt</a></li>
+  					
+  				</ul>
+  				
+  				<ul class="nav navbar-nav navbar-center">
+  					<li>
+  						<form class="navbar-form">
+  							<div class="form-group">
+  								<input type="text" class="form-control" placeholder="Hľadaný výraz">
+  							</div>
+  							<button type="submit" class="btn btn-default">Hľadať</button>
+  						</form>
+  					</li>
+  				</ul>
+
+  				<ul class="nav navbar-nav navbar-right">
+  					<li>
+  						<form class="navbar-form">
+  							<div class="form-group">
+  								<input type="email" class="form-control" id="emailInput" placeholder="Email">
+  							</div>
+  							<div class="form-group">
+  								<input type="password" class="form-control" id="passInput" placeholder="Heslo">
+  							</div>
+  							<button type="submit" class="btn btn-default">Prihlásiť</button>
+  						</form>
+  					</li>
+  				</ul>
+  			</div><!--/.nav-collapse -->
+  		</div><!--/.container-fluid -->
+  	</nav>
+
+  	<div class="container">
 <?php
 		$this->renderBlock('content', $this->params, 'html');
 ?>
-
-<?php
-		$this->renderBlock('scripts', get_defined_vars());
-?>
-</body>
-</html>
-<?php
+  	</div>
+  	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  	<!-- Include all compiled plugins (below), or include individual files as needed -->
+  	<script src="js/bootstrap.min.js"></script>
+  </body>
+  </html><?php
 		return get_defined_vars();
 	}
 
@@ -71,26 +107,9 @@ class Templatea1106f5151 extends Latte\Runtime\Template
 	function prepare()
 	{
 		extract($this->params);
-		if (isset($this->params['flash'])) trigger_error('Variable $flash overwritten in foreach on line 18');
+		if (isset($this->params['flash'])) trigger_error('Variable $flash overwritten in foreach on line 21');
 		Nette\Bridges\ApplicationLatte\UIRuntime::initialize($this, $this->parentName, $this->blocks);
 		
-	}
-
-
-	function blockHead($_args)
-	{
-		
-	}
-
-
-	function blockScripts($_args)
-	{
-		extract($_args);
-?>
-	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
-	<script src="<?php echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl($basePath)) /* line 25 */ ?>/js/main.js"></script>
-<?php
 	}
 
 }
