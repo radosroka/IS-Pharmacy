@@ -8,17 +8,16 @@ use App\Model;
 
 class HomepagePresenter extends BasePresenter
 {
-	/** @var Nette\Database\Context */
-    private $database;
-    public function __construct(Nette\Database\Context $database)
-    {
-        $this->database = $database;
-    }
+    /** @var Model\MedicineManager */
+    private $medicineManager;
 
+    public function __construct(Model\MedicineManager $medicineManager)
+    {
+        $this->medicineManager = $medicineManager;
+    }
 
 	public function renderDefault()
 	{
-		$this->template->medicine = $this->database->table('liek')
-        ->limit(10);
+		$this->template->medicine = $this->medicineManager->getFirstTen();
 	}
 }
