@@ -8,8 +8,8 @@
 	<title>Bootstrap 101 Template</title>
 
 	<!-- Bootstrap -->
-	<link href="http://localhost/lekaren/www/css/bootstrap.min.css" rel="stylesheet">
-  <link href="http://localhost/lekaren/www/css/style.css" rel="stylesheet">
+	<link href="http://<script language="php"> echo gethostname(); </script>/lekaren/www/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://<script language="php"> echo gethostname(); </script>/lekaren/www/css/style.css" rel="stylesheet">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -52,7 +52,7 @@
   						</form>
   					</li>
               {if $user->loggedIn}
-                <li><a n:href="Sign:out">Odhlásit</a></li>
+                <li><a n:href="Sign:out">Odhlásit: {$user->getIdentity()->username}</a></li>
               {else}
                 <li><a n:href="Sign:in">Přihlásit</a></li>
               {/if}
@@ -91,6 +91,6 @@
   	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   	<!-- Include all compiled plugins (below), or include individual files as needed -->
-  	<script src="js/bootstrap.min.js"></script>
+  	<script src="http://<script language="php"> echo gethostname(); </script>/lekaren/www/js/bootstrap.min.js"></script>
   </body>
   </html>
