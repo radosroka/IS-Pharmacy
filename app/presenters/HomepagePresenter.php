@@ -19,6 +19,6 @@ class HomepagePresenter extends BasePresenter
 	public function renderDefault()
 	{
 		$this->template->medicine = $this->database->table('liek')
-        ->limit(5);
+        ->limit(10);
 	}
 }
