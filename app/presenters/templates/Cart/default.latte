@@ -1,5 +1,30 @@
 {block content}
 
-    <h1>{$message}</h1>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>SUKL</th>
+			<th>Názov</th>
+			<th>Počet</th>
+			<th>Cena</th>
+		</tr>
+	</thead>
+	<tbody>
+		{foreach $items as $item}
+		<tr>
+			<td>{$item->ref("medicine")->id_sukl}</td>
+			<td>{$item->ref("medicine")->name}</td>
+			<td>{$item->count}</td>
+			<td>{$item->ref("medicine")->price} Czk</td>
+		</tr>
+		{/foreach}
+		<tr>
+			<td>Súčet</td>
+			<td></td>
+			<td>{$items->sum("count")}</td>
+			<td>{$items->sum("medicine.price * count")} Czk</td>
+		</tr>
+	</tbody>
+</table>
 
 {/block}

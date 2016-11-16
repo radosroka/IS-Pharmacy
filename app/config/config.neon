@@ -18,6 +18,7 @@ session:
 services:
 	- App\Model\UserManager
 	- App\Model\MedicineManager
+	- App\Model\CartManager
 	- App\Forms\FormFactory
 	- App\Forms\SignInFormFactory
 	- App\Forms\SignUpFormFactory

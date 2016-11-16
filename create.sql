@@ -7,16 +7,21 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user` int(11) NOT NULL,
   `medicine` char(6) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user` (`user`),
+  `count` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`user`,`medicine`),
   KEY `medicine` (`medicine`),
   CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`),
   CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`medicine`) REFERENCES `medicine` (`id_sukl`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+INSERT INTO `cart` (`user`, `medicine`, `count`) VALUES
+(4, '00R045', 9),
+(4, '0I7IE4', 1),
+(4, '103T8V', 1),
+(4, '2250FW', 1),
+(4, '27TMH2', 1);
 
 DROP TABLE IF EXISTS `medicine`;
 CREATE TABLE `medicine` (
@@ -146,4 +151,4 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `role`) VALUES
 (4, 'rado', UNHEX('243279243130243456356A5A313954326F656979383743494D5035684F775A543951794F3277387647544858642E78584433636A6C74696C6C487265'),  'radovan.sroka@gmail.com',  '0'),
 (5, 'admin',  UNHEX('243279243130246D716D33777A5361385445563457732F42515652367549614C744E646669387A73545870556856427076346B544C4374682F743169'),  'admin@this.com', 'admin');
 
--- 2016-11-16 20:00:43
+-- 2016-11-16 23:49:39
