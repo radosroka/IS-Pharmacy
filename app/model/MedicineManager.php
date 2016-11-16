@@ -19,16 +19,16 @@ class MedicineManager
 
 	public function getItemsCount()
 	{
-		return $this->database->table('liek')->count(); 
+		return $this->database->table('medicine')->count(); 
 	}
 
 	public function getContent($length, $offset)
 	{
-		return $this->database->table('liek')->limit($length, $offset);
+		return $this->database->table('medicine')->limit($length, $offset);
 	}
 
 	public function getFirstTen()
 	{
-		return $this->database->table('liek')->limit(10);
+		return $this->database->table('medicine')->limit(10);
 	}
 }

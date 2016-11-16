@@ -5,18 +5,31 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-DROP TABLE IF EXISTS `liek`;
-CREATE TABLE `liek` (
+DROP TABLE IF EXISTS `cart`;
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` int(11) NOT NULL,
+  `medicine` char(6) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`),
+  KEY `medicine` (`medicine`),
+  CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`),
+  CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`medicine`) REFERENCES `medicine` (`id_sukl`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+
+DROP TABLE IF EXISTS `medicine`;
+CREATE TABLE `medicine` (
   `id_sukl` char(6) COLLATE utf8_bin NOT NULL,
-  `nazov` varchar(1024) COLLATE utf8_bin NOT NULL,
-  `vyrobca` varchar(1024) COLLATE utf8_bin NOT NULL,
-  `dodavatel` int(11) NOT NULL,
-  `cena` int(11) NOT NULL,
-  `na_predpis` int(11) DEFAULT NULL,
+  `name` varchar(1024) COLLATE utf8_bin NOT NULL,
+  `producer` varchar(1024) COLLATE utf8_bin NOT NULL,
+  `distributor` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
+  `prescription` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_sukl`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `liek` (`id_sukl`, `nazov`, `vyrobca`, `dodavatel`, `cena`, `na_predpis`) VALUES
+INSERT INTO `medicine` (`id_sukl`, `name`, `producer`, `distributor`, `price`, `prescription`) VALUES
 ('00R045',  'Diltiazem Hydrochloride',  'NCS HealthCare of KY, Inc dba Vangard Labs', 2,  895,  1),
 ('04T320',  'Benzocaine', 'CVS Pharmacy', 38, 523,  1),
 ('0B79S4',  'Diclofenac Sodium and Misoprostol',  'Eagle Pharmaceuticals, Inc.',  58, 693,  0),
@@ -133,4 +146,4 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `role`) VALUES
 (4, 'rado', UNHEX('243279243130243456356A5A313954326F656979383743494D5035684F775A543951794F3277387647544858642E78584433636A6C74696C6C487265'),  'radovan.sroka@gmail.com',  '0'),
 (5, 'admin',  UNHEX('243279243130246D716D33777A5361385445563457732F42515652367549614C744E646669387A73545870556856427076346B544C4374682F743169'),  'admin@this.com', 'admin');
 
--- 2016-11-15 20:39:24
+-- 2016-11-16 20:00:43

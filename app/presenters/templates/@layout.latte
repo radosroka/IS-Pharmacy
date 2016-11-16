@@ -55,6 +55,7 @@
   						</form>
   					</li>
               {if $user->loggedIn}
+                <li><a n:href="Cart:default">Košík</a></li>
                 <li><a n:href="Sign:out">Odhlásit: {$user->getIdentity()->username}</a></li>
               {else}
                 <li><a n:href="Sign:in">Přihlásit</a></li>
