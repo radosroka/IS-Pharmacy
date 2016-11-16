@@ -1,4 +1,13 @@
 {block content}
+    
+    <div class="text-center">
+        <ul class="pagination">
+                {for $i = 1; $i <= $paginator->getLastPage(); $i++}
+                    <li><a  n:href="this, page => $i">{$i}</a></li>
+                {/for}
+        </ul>
+    </div>
+
     {foreach $medicine as $med}
     <div class="row">
     	<div class="col-sm-2 col-sm-5cols">
@@ -13,4 +22,13 @@
     	<div class="col-sm-4"><font size="4">{$med->cena}</font> Czk</div>
     </div>
     {/foreach}
+
+    <div class="text-center">
+        <ul class="pagination">
+                {for $i = 1; $i <= $paginator->getLastPage(); $i++}
+                    <li><a  n:href="this, page => $i">{$i}</a></li>
+                {/for}
+        </ul>
+    </div>
+
 {/block}

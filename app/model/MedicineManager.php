@@ -16,9 +16,15 @@ class MedicineManager
 		$this->database = $database;
 	}
 
-	public function getAll()
+
+	public function getItemsCount()
 	{
-		return $this->database->table('liek');
+		return $this->database->table('liek')->count(); 
+	}
+
+	public function getContent($length, $offset)
+	{
+		return $this->database->table('liek')->limit($length, $offset);
 	}
 
 	public function getFirstTen()
