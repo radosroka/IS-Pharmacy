@@ -7,6 +7,7 @@
 			<th>Názov</th>
 			<th>Počet</th>
 			<th>Cena</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -16,6 +17,11 @@
 			<td>{$item->ref("medicine")->name}</td>
 			<td>{$item->count}</td>
 			<td>{$item->ref("medicine")->price} Czk</td>
+			<td>
+				<a style="padding: 5px;" n:href="this"><span style="color: #000;" class="glyphicon">&#x2b;</span></a>
+				<a style="padding: 5px;" n:href="this"><span style="color: #000;" class="glyphicon">&#x2212;</span></a>
+				<a style="padding: 5px;" n:href="this"><span style="color: #000;" class="glyphicon">&#xe014;</span></a>
+			</td>
 		</tr>
 		{/foreach}
 		<tr>
