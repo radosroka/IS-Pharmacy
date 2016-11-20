@@ -1,0 +1,33 @@
+{block content}
+
+    {foreach $medicine as $med}
+    <div class="row">
+    	<div class="col-sm-2 col-sm-5cols">
+    		<div class="thumbnail">
+    			<img src="https://cdn1.iconfinder.com/data/icons/complete-medical-healthcare-icons-for-apps-and-web/128/medication-drugs1-512.png" alt="Some image">
+    		</div>
+    	</div>
+    	<div class="col-sm-4">
+    		<b>{$med->name}</b>
+    		<figcaption>{$med->id_sukl}</figcaption>
+    	</div>
+    	<div class="col-sm-4">
+            <div><font size="4">{$med->price}</font> Czk</div>
+            <div>
+                <a href="">
+                    <img src="http://simpleicon.com/wp-content/uploads/Shopping-Cart-11-64x64.png" alt="Nákupny košík">
+                </a>
+            </div>
+        </div>
+    </div>
+    {/foreach}
+
+    <div class="text-center">
+        <ul class="pagination">
+                {for $i = 1; $i <= $paginator->getLastPage(); $i++}
+                    <li><a style="color: #000;"  n:href="this, page => $i">{$i}</a></li>
+                {/for}
+        </ul>
+    </div>
+
+{/block}

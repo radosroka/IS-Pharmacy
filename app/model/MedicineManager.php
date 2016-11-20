@@ -31,4 +31,15 @@ class MedicineManager
 	{
 		return $this->database->table('medicine')->limit(10);
 	}
+
+	public function getSeekedItems($ref, $length, $offset)
+	{
+		return $this->database->query("SELECT * FROM medicine WHERE INSTR(name, ?) > ? LIMIT ? OFFSET ?", $ref, 0, $length, $offset);
+	}
+
+	public function getSeekedItemsCount($ref)
+	{
+		$data = $this->database->query("SELECT * FROM medicine WHERE INSTR(name, ?) > ?", $ref, 0);
+		return $data->getRowCount();
+	}
 }

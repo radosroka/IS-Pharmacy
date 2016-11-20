@@ -47,12 +47,14 @@
   				
   				<ul class="nav navbar-nav navbar-right">
   					<li>
-  						<form class="navbar-form">
-  							<div class="form-group">
-  								<input type="text" class="form-control" placeholder="Hľadaný výraz">
-  							</div>
-  							<button type="submit" class="btn btn-default">Hľadať</button>
-  						</form>
+  						
+              <form name="searchBox" class="navbar-form">
+                <div class="form-group">
+                  <input id="searchBoxText" type="text" class="form-control" placeholder="Hľadaný výraz">
+                </div>
+                  <input type='button' value='Hľadať' class="btn" style="color: #626262;" onclick="searchItems()"/>
+              </form>
+
   					</li>
               {if $user->loggedIn}
                 <li><a n:href="Cart:default">Košík</a></li>
@@ -98,5 +100,6 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   	<!-- Include all compiled plugins (below), or include individual files as needed -->
   	<script src="http://<script language="php"> echo gethostname(); </script>/lekaren/www/js/bootstrap.min.js"></script>
+    <script src="http://<script language="php"> echo gethostname(); </script>/lekaren/www/js/searchBox.js"></script>
   </body>
   </html>
