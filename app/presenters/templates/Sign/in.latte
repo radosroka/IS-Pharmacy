@@ -1,11 +1,13 @@
 {block content}
-<h1 n:block=title>Sign In</h1>
-
-{control signInForm}
+<h1 n:block=title style="color: #626262; text-shadow: 3px 2px #d2d2e0;">Sign in</h1>
 
 {* OR
-{import '../components/form.latte'}
-{include form signInForm}
+{control signInForm}
 *}
 
-<p><a n:href="up">Don't have an account yet? Sign up.</a></p>
+
+{import '../components/form.latte'}
+{include form signInForm}
+
+
+<p><a n:href="up" style="color: #626262; text-shadow: 1px 1px #d2d2e0;"><br>Don't have an account yet? Sign up.</a></p>

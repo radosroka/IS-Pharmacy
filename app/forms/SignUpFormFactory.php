@@ -34,18 +34,22 @@ class SignUpFormFactory
 	{
 		$form = $this->factory->create();
 		$form->addText('username', 'Pick a username:')
-			->setRequired('Please pick a username.');
+			->setRequired('Please pick a username.')
+			->setAttribute('class', 'form-control');
 
 		$form->addText('email', 'Your e-mail:')
 			->setRequired('Please enter your e-mail.')
-			->addRule($form::EMAIL);
+			->addRule($form::EMAIL)
+			->setAttribute('class', 'form-control');
 
 		$form->addPassword('password', 'Create a password:')
 			->setOption('description', sprintf('at least %d characters', self::PASSWORD_MIN_LENGTH))
 			->setRequired('Please create a password.')
-			->addRule($form::MIN_LENGTH, NULL, self::PASSWORD_MIN_LENGTH);
+			->addRule($form::MIN_LENGTH, NULL, self::PASSWORD_MIN_LENGTH)
+			->setAttribute('class', 'form-control');
 
-		$form->addSubmit('send', 'Sign up');
+		$form->addSubmit('send', 'Sign up')
+			 ->setAttribute('class', 'btn btn-default');
 
 		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
 			try {
