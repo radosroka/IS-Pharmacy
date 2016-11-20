@@ -25,10 +25,10 @@
     <div class="text-center">
         <ul class="pagination">
                 {for $i = 1; $i <= $paginator->getLastPage(); $i++}
-                    {if $i == 1 || $i == $paginator->getLastPage() || $i == $paginator->getPage() || $i == ($paginator->getPage() - 1) || $i == ($paginator->getPage() - 2) || $i == ($paginator->getPage() - 3) || $i == ($paginator->getPage() + 1) || $i == ($paginator->getPage() + 2) || $i == ($paginator->getPage() + 3)}
+                    {if $i == 1 || $i == $paginator->getLastPage() || $i == $paginator->getPage() || $i == ($paginator->getPage() - 1) || $i == ($paginator->getPage() - 2) || $i == ($paginator->getPage() - 3) || $i == ($paginator->getPage() + 1) || $i == ($paginator->getPage() + 2) || $i == ($paginator->getPage() + 3) || $i == ($paginator->getlastPage() / 2)}
                         
                         {if $i == $paginator->getPage()}
-                            <li class="active"><a style="color: #000;"  n:href="this, page => $i">{$i}</a></li>
+                            <li class="active" style="color: red"><a style="color: #000" n:href="this, page => $i">{$i}</a></li>
                         {else}
                             <li><a style="color: #000;"  n:href="this, page => $i">{$i}</a></li>
                         {/if}
