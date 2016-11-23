@@ -41,4 +41,12 @@ class CartManager
 			$this->database->table($this->table)->where("user = ?", $userID)->where("medicine = ?", $sukl)->update(array("count" => $cnt[0]->count + $count));
 		}
 	}
+
+	public function getCartIdOfUser($userID)
+	{
+		$data = $this->database->query("SELECT id FROM cart WHERE user = ? GROUP BY id", $userID);
+		foreach ($data as $d ) {
+			return $d->id;
+		}
+	}
 }

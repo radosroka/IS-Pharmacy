@@ -19,7 +19,9 @@ services:
 	- App\Model\UserManager
 	- App\Model\MedicineManager
 	- App\Model\CartManager
+	- App\Model\OrderManager
 	- App\Forms\FormFactory
 	- App\Forms\SignInFormFactory
 	- App\Forms\SignUpFormFactory
+	- App\Forms\OrderFormFactory
 	router: App\RouterFactory::createRouter

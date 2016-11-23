@@ -5,23 +5,28 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cart_id` int(11),
+  `name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `city` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `street` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `code` int(5) NOT NULL,
+  PRIMARY KEY (`id`, `cart_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
 DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user` int(11) NOT NULL,
   `medicine` char(6) COLLATE utf8_bin NOT NULL,
   `count` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`user`,`medicine`),
+  PRIMARY KEY (`id`, `user`,`medicine`),
   KEY `medicine` (`medicine`),
   CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`),
   CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`medicine`) REFERENCES `medicine` (`id_sukl`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
-INSERT INTO `cart` (`user`, `medicine`, `count`) VALUES
-(4, '00R045', 9),
-(4, '0I7IE4', 1),
-(4, '103T8V', 1),
-(4, '2250FW', 1),
-(4, '27TMH2', 1);
 
 DROP TABLE IF EXISTS `medicine`;
 CREATE TABLE `medicine` (
