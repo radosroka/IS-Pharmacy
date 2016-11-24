@@ -1,3 +1,61 @@
 {block content}
-    <h1>{$text}<h1>
+
+	<table class="table">
+		<thead>
+		  <tr>
+		  	<th>ID</th>
+		    <th>Username</th>
+		    <th>Email</th>
+		    <th>Prava</th>
+		    <th></th>
+		    <th></th>
+		  </tr>
+		</thead>
+	    <tbody>
+	    {foreach $users as $u}
+			<tr>
+				<td>{$u->id}</td>
+				<td><a data-toggle="tooltip" title="Zobraz objednavky">{$u->username}</a></td>
+				<td>{$u->email}</td>
+				<td>
+					{if $u->role != 'admin'}
+						<p>&nbsp;user</p>
+					{else}
+						<p>{$u->role}</p>
+					{/if}
+				</td>
+				
+				{if $u->role != 'admin'}
+					<td>
+						<button class="btn btn-default" style="background-size: cover; background-color: white; width: 10; height: 10" data-toggle="tooltip" title="Pridat zakaznikovi administratorske prava">
+							<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSiqahJQiloOEPj5wbDM1HLLRSQdj59ZfH_Mzt-EMRI-bedHPg5" width="20" height="20"></>
+						</button>
+					</td>
+				{/if}
+				<td>				
+					{if $u->role != 'admin'}
+						<button class="btn btn-default">Vymaz zakaznika</button>
+					{/if}
+				</td>
+			</tr>
+	    {/foreach}
+	    </tbody>
+	</table>
+   
+    <div class="text-center">
+        <ul class="pagination">
+                {for $i = 1; $i <= $paginator->getLastPage(); $i++}
+                    {if $i == 1 || $i == $paginator->getLastPage() || $i == $paginator->getPage() || $i == ($paginator->getPage() - 1) || $i == ($paginator->getPage() - 2) || $i == ($paginator->getPage() - 3) || $i == ($paginator->getPage() + 1) || $i == ($paginator->getPage() + 2) || $i == ($paginator->getPage() + 3) || $i == ($paginator->getlastPage() / 2)}
+                        
+                        {if $i == $paginator->getPage()}
+                            <li class="active" style="color: red"><a style="color: #000;"  n:href="this, page => $i">{$i}</a></li>
+                        {else}
+                            <li><a style="color: #000;"  n:href="this, page => $i">{$i}</a></li>
+                        {/if}
+
+                    {/if}
+                {/for}
+        </ul>
+    </div>
+
 {/block}
