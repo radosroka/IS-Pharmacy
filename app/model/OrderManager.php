@@ -86,4 +86,9 @@ class OrderManager
 		$this->database->query("UPDATE orders SET handeled=1 WHERE id = ?", $id);
 		return 1;
 	}
+
+	public function getOrderContent($orderID)
+	{
+		return $this->database->query("SELECT m.*, count(m.name) as count FROM orders o left join cart c on(o.cart_id = c.id) left join medicine m on(c.medicine = m.id_sukl) WHERE o.id = ? GROUP BY m.name", $orderID);
+	}
 }

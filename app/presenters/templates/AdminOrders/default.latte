@@ -14,7 +14,7 @@
 	    <tbody>
 	    {foreach $orders as $o}
 			<tr>
-				<td><a  data-toggle="tooltip" title="Zobrazit obsah ojednavky" style="color: black">{$o->id}</a></td>
+				<td><a  n:href="OrderContent:default, orderID => $o->id" data-toggle="tooltip" title="Zobrazit obsah ojednavky" style="color: black">{$o->id}</a></td>
 				<td>{$o->date}</td>
 				<td>
 					{if !$o->handeled}				
