@@ -26,11 +26,14 @@ class AdminOrdersPresenter extends BasePresenter
         $this->orderManager = $orderManager;
     }
 
-	public function renderDefault($userID = 0, $userName)
+	public function renderDefault($userID = 0, $userName, $orderToHandle = 0)
 	{
 		$this->template->text = "Toto je administratorska stránka";
         if (!$this->getUser()->isInRole("admin"))
             $this->redirect("Admin:error");
+
+        if ($orderToHandle)
+            $this->orderManager->handleOrder($orderToHandle);
 
         if ($userID != 0) {
             $this->template->orders = $this->orderManager->getOrdersOfUser($userID);
@@ -44,11 +47,6 @@ class AdminOrdersPresenter extends BasePresenter
 
         $this->template->orderManager = $this->orderManager;
 	}
-
-    public function handleOrder($id)
-    {
-        $this->orderManager->handleOrder($id);
-    }
 
     public function renderError()
     {

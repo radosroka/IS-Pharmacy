@@ -72,17 +72,18 @@ class OrderManager
 
 	public function getOrdersOfUser($userID)
 	{
-		return $this->database->query("SELECT o.* FROM orders o left join cart c on (o.cart_id = c.id) WHERE c.user = ?", $userID);
+		return $this->database->query("SELECT o.* FROM orders o left join cart c on (o.cart_id = c.id) WHERE c.user = ? GROUP BY o.id", $userID);
 		//return $this->database->query("SELECT * FROM orders");
 	}
 
 	public function getAllOrders()
 	{
-		return $this->database->query("SELECT * FROM orders");
+		return $this->database->query("SELECT * FROM orders GROUP BY id");
 	}
 
 	public function handleOrder($id)
 	{
 		$this->database->query("UPDATE orders SET handeled=1 WHERE id = ?", $id);
+		return 1;
 	}
 }
