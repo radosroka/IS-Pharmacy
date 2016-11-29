@@ -80,4 +80,9 @@ class OrderManager
 	{
 		return $this->database->query("SELECT * FROM orders");
 	}
+
+	public function handleOrder($id)
+	{
+		$this->database->query("UPDATE orders SET handeled=1 WHERE id = ?", $id);
+	}
 }

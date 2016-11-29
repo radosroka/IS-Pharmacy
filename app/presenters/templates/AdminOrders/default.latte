@@ -14,13 +14,13 @@
 	    <tbody>
 	    {foreach $orders as $o}
 			<tr>
-				<td><a  data-toggle="tooltip" title="Zobrazit obsah ojednavky">{$o->id}</a></td>
+				<td><a  data-toggle="tooltip" title="Zobrazit obsah ojednavky" style="color: black">{$o->id}</a></td>
 				<td>{$o->date}</td>
 				<td>
 					{if !$o->handeled}				
-						<button class="btn btn-default" style="color: red">Vybavit objednavku</button>
+						<a class="btn btn-default" n:href="this" onclick="{$orderManager->handleOrder($o->id)}" style="color: red">Vybavit objednavku</a>
 					{else}
-						<p style="color: green">OK</p>
+						<p style="color: green">Odoslana</p>
 					{/if}
 				</td>
 			</tr>

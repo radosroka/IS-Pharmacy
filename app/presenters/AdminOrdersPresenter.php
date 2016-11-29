@@ -26,7 +26,6 @@ class AdminOrdersPresenter extends BasePresenter
         $this->orderManager = $orderManager;
     }
 
-
 	public function renderDefault($userID = 0, $userName)
 	{
 		$this->template->text = "Toto je administratorska stránka";
@@ -39,10 +38,17 @@ class AdminOrdersPresenter extends BasePresenter
             $this->template->userID = $userID;
         } else {
             $this->template->orders = $this->orderManager->getAllOrders();
-            $this->template->userName = "Vsetky objednavky";
+            $this->template->userName = "Vsetci";
             $this->template->userID = "***";
         }
+
+        $this->template->orderManager = $this->orderManager;
 	}
+
+    public function handleOrder($id)
+    {
+        $this->orderManager->handleOrder($id);
+    }
 
     public function renderError()
     {
