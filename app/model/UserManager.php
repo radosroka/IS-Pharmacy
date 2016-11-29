@@ -92,6 +92,8 @@ class UserManager implements Nette\Security\IAuthenticator
 		return $this->database->table(self::TABLE_NAME)->count(); 
 	}
 
+	
+
 }
 
 

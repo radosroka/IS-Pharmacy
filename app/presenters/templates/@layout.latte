@@ -41,7 +41,8 @@
   					<li><a href="#">O Nás</a></li>
   					<li><a href="#">Kontakt</a></li>
             {if $user->isInRole("admin")}
-              <li><a n:href="Admin:default">Administrácia</a></li>
+              <li><a n:href="Admin:default">Pouzivatelia</a></li>
+              <li><a n:href="AdminOrders:default">Objednavky</a></li>
   					{/if}
   				</ul>
   				
@@ -94,7 +95,7 @@
     <footer class="footer">
       <div class="container">
         
-        <p class="text-muted">Blabla</p>
+        <p class="text-muted">© Copyright Radovan Sroka & Tomáš Sýkora</p>
                
       </div>
     </footer>

@@ -7,12 +7,14 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL ,
   `cart_id` int(11),
   `name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `city` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `street` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `code` int(5) NOT NULL,
+  `handeled` bit NOT NULL,
+  `date` DATE NOT NULL,
   PRIMARY KEY (`id`, `cart_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -22,6 +24,7 @@ CREATE TABLE `cart` (
   `user` int(11) NOT NULL,
   `medicine` char(6) COLLATE utf8_bin NOT NULL,
   `count` int(11) NOT NULL DEFAULT '1',
+  `ordered` bit,
   PRIMARY KEY (`id`, `user`,`medicine`),
   KEY `medicine` (`medicine`),
   CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`),
@@ -37,6 +40,13 @@ CREATE TABLE `medicine` (
   `price` int(11) NOT NULL,
   `prescription` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_sukl`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+DROP TABLE IF EXISTS `orders_auto_increment`;
+CREATE TABLE `orders_auto_increment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `value` bit NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `medicine` (`id_sukl`, `name`, `producer`, `distributor`, `price`, `prescription`) VALUES

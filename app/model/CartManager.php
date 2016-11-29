@@ -20,7 +20,7 @@ class CartManager
 
 	public function getUserCart($userID)
 	{
-		return $this->database->table($this->table)->where("user = ?", $userID); 
+		return $this->database->table($this->table)->where("user = ?", $userID)->where("ordered = 0"); 
 	}
 
 	public function getContent($length, $offset, $userID)
@@ -34,7 +34,8 @@ class CartManager
 			$this->database->table($this->table)->insert([
 					"user" => $userID,
 					"medicine" => $sukl,
-					"count" => $count
+					"count" => $count,
+					"ordered" => 0
 				]);
 		} catch (Nette\Database\UniqueConstraintViolationException $e) {
 			$cnt = $this->database->table($this->table)->where("user = ?", $userID)->where("medicine = ?", $sukl)->select("count");
@@ -44,9 +45,8 @@ class CartManager
 
 	public function getCartIdOfUser($userID)
 	{
-		$data = $this->database->query("SELECT id FROM cart WHERE user = ? GROUP BY id", $userID);
-		foreach ($data as $d ) {
-			return $d->id;
-		}
+		$data = $this->database->query("SELECT id FROM cart WHERE user = ?  AND ordered = 0", $userID);
+		$this->database->query("UPDATE cart SET ordered=1 WHERE user = ?  AND ordered = 0", $userID);
+		return $data;
 	}
 }

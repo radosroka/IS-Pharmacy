@@ -63,9 +63,14 @@ class OrderFormFactory
 		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
 			try {
 				$userID = $this->user->id;
-				$cartID = $this->cartManager->getCartIdOfUser($userID);
+				$cartIDs = $this->cartManager->getCartIdOfUser($userID);
 
-				$this->orderManager->addOrder($cartID, $values->name, $values->city, $values->street, $values->code);
+				$this->orderManager->lockAddOrder();
+				foreach ($cartIDs as $cartID) {
+					$this->orderManager->addOrder($cartID->id, $values->name, $values->city, $values->street, $values->code);
+				}
+				$this->orderManager->unlockAddOrder();
+
 			} catch (Model\DuplicateNameException $e) {
 				$form->addError('Error creating order.');
 				return;

@@ -4,9 +4,9 @@
 		<thead>
 		  <tr>
 		  	<th>ID</th>
-		    <th>Username</th>
+		    <th>Zákazník</th>
 		    <th>Email</th>
-		    <th>Prava</th>
+		    <th>Práva</th>
 		    <th></th>
 		    <th></th>
 		  </tr>
@@ -15,13 +15,13 @@
 	    {foreach $users as $u}
 			<tr>
 				<td>{$u->id}</td>
-				<td><a data-toggle="tooltip" title="Zobraz objednavky">{$u->username}</a></td>
+				<td><a n:href="AdminOrders:default, userID => $u->id, userName => $u->username" data-toggle="tooltip" title="Zobrazit objednavky">{$u->username}</a></td>
 				<td>{$u->email}</td>
 				<td>
 					{if $u->role != 'admin'}
 						<p>&nbsp;user</p>
 					{else}
-						<p>{$u->role}</p>
+						<p>admin</p>
 					{/if}
 				</td>
 				
@@ -31,10 +31,12 @@
 							<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSiqahJQiloOEPj5wbDM1HLLRSQdj59ZfH_Mzt-EMRI-bedHPg5" width="20" height="20"></>
 						</button>
 					</td>
+				{else}
+					<td></td>
 				{/if}
 				<td>				
 					{if $u->role != 'admin'}
-						<button class="btn btn-default">Vymaz zakaznika</button>
+						<button class="btn btn-default">Vymazať zákazníka</button>
 					{/if}
 				</td>
 			</tr>

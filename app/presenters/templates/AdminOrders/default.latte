@@ -1,0 +1,31 @@
+{block content}
+
+	<h2 style="color: black">pouzivatel: {$userName}</h2>
+	<h4>id: {$userID}</h4>
+
+	<table class="table">
+		<thead>
+		  <tr>
+		  	<th>ID objednavky</th>
+		    <th>Datum</th>
+		    <th>Stav</th>
+		  </tr>
+		</thead>
+	    <tbody>
+	    {foreach $orders as $o}
+			<tr>
+				<td><a  data-toggle="tooltip" title="Zobrazit obsah ojednavky">{$o->id}</a></td>
+				<td>{$o->date}</td>
+				<td>
+					{if !$o->handeled}				
+						<button class="btn btn-default" style="color: red">Vybavit objednavku</button>
+					{else}
+						<p style="color: green">OK</p>
+					{/if}
+				</td>
+			</tr>
+	    {/foreach}
+	    </tbody>
+	</table>
+
+{/block}

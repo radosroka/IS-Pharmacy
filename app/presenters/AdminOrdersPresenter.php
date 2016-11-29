@@ -6,7 +6,7 @@ use Nette;
 use App\Model;
 
 
-class AdminPresenter extends BasePresenter
+class AdminOrdersPresenter extends BasePresenter
 {
 	/** @var Nette\Database\Context */
     private $database;
@@ -15,31 +15,33 @@ class AdminPresenter extends BasePresenter
     private $cartManager;
     /** @var Model\UserManager */
     private $userManager;
+    /** @var Model\OrderManager */
+    private $orderManager;
 
-    public function __construct(Nette\Database\Context $database, Model\CartManager $cartManager, Model\UserManager $userManager)
+    public function __construct(Nette\Database\Context $database, Model\CartManager $cartManager, Model\UserManager $userManager, Model\OrderManager $orderManager)
     {
         $this->database = $database;
         $this->cartManager = $cartManager;
         $this->userManager = $userManager;
+        $this->orderManager = $orderManager;
     }
 
 
-	public function renderDefault($page = 1)
+	public function renderDefault($userID = 0, $userName)
 	{
 		$this->template->text = "Toto je administratorska stránka";
         if (!$this->getUser()->isInRole("admin"))
             $this->redirect("Admin:error");
 
-        $perPage = 10;
-        $paginator = new Nette\Utils\Paginator;
-
-        $paginator->setItemCount($this->userManager->getUsersCount());
-        $paginator->setItemsPerPage($perPage);
-        $paginator->setPage($page);
-
-        $this->template->paginator = $paginator;
-
-        $this->template->users = $this->userManager->getUsers($paginator->getLength(), $paginator->getOffset());
+        if ($userID != 0) {
+            $this->template->orders = $this->orderManager->getOrdersOfUser($userID);
+            $this->template->userName = $userName;
+            $this->template->userID = $userID;
+        } else {
+            $this->template->orders = $this->orderManager->getAllOrders();
+            $this->template->userName = "Vsetky objednavky";
+            $this->template->userID = "***";
+        }
 	}
 
     public function renderError()
