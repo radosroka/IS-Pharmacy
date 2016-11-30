@@ -92,7 +92,26 @@ class UserManager implements Nette\Security\IAuthenticator
 		return $this->database->table(self::TABLE_NAME)->count(); 
 	}
 
-	
+	public function deleteUser($userID)
+	{
+		$this->database->query("DELETE FROM users WHERE id = ?", $userID);
+	}
+
+	public function addAdminRights($userID)
+	{
+		$this->database->query("UPDATE users SET role='admin' WHERE id = ?", $userID);
+	}
+
+	public function removeAdminRights($userID)
+	{
+		$this->database->query("UPDATE users SET role='user' WHERE id = ?", $userID);
+	}
+
+	public function getUserIdByName($name)
+	{
+		$name = $this->database->query("SELECT id FROM users WHERE username = ?", $name);
+		return $data[0]->id;
+	}
 
 }
 

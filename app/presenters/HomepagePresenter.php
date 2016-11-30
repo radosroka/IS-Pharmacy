@@ -33,7 +33,7 @@ class HomepagePresenter extends BasePresenter
         
         $paginator->setPage($page); // the number of the current page (numbered from one)
 
-        if (!$this->getUser()->isInRole("admin") && $sukl != "" && $this->getUser()->isLoggedIn()) {
+        if (!$this->getUser()->isInRole("admin") && !$this->getUser()->isInRole("mainAdmin") && $sukl != "" && $this->getUser()->isLoggedIn()) {
             $this->cartManager->addToCart($sukl, $this->getUser()->id, 1);
         }
 

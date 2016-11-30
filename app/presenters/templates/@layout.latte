@@ -42,8 +42,13 @@
   					<li><a href="#">Kontakt</a></li>
             {if $user->isInRole("admin")}
               <li><a n:href="Admin:default">Pouzivatelia</a></li>
-              <li><a n:href="AdminOrders:default">Objednavky</a></li>
-  					{/if}
+              <li><a n:href="DisplayOrders:default">Objednavky</a></li>
+            {elseif $user->isInRole("mainAdmin")}
+              <li><a n:href="Admin:mainAdmin">Pouzivatelia</a></li>
+              <li><a n:href="DisplayOrders:default">Objednavky</a></li>
+            {elseif $user->loggedIn}
+              <li><a n:href="DisplayOrders:myOrders, userID => $user->id">Objednavky</a></li>
+            {/if}
   				</ul>
   				
   				<ul class="nav navbar-nav navbar-right">
@@ -58,7 +63,7 @@
 
   					</li>
               {if $user->loggedIn}
-                {if !($user->isInRole("admin"))}
+                {if !($user->isInRole("admin")) && !($user->isInRole("mainAdmin"))}
                   <li><a n:href="Cart:default">Košík</a></li>
                 {/if}
                 <li><a n:href="Sign:out">Odhlásit: {$user->getIdentity()->username}</a></li>

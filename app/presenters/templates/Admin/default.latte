@@ -6,40 +6,21 @@
 		  	<th>ID</th>
 		    <th>Zákazník</th>
 		    <th>Email</th>
-		    <th>Práva</th>
-		    <th></th>
 		    <th></th>
 		  </tr>
 		</thead>
 	    <tbody>
 	    {foreach $users as $u}
+	    	{if $u->role != 'mainAdmin' && $u->role != 'admin'}
 			<tr>
 				<td>{$u->id}</td>
 				<td><a n:href="AdminOrders:default, userID => $u->id, userName => $u->username" data-toggle="tooltip" title="Zobrazit objednavky">{$u->username}</a></td>
 				<td>{$u->email}</td>
-				<td>
-					{if $u->role != 'admin'}
-						<p>&nbsp;user</p>
-					{else}
-						<p>admin</p>
-					{/if}
-				</td>
-				
-				{if $u->role != 'admin'}
-					<td>
-						<button class="btn btn-default" style="background-size: cover; background-color: white; width: 10; height: 10" data-toggle="tooltip" title="Pridat zakaznikovi administratorske prava">
-							<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSiqahJQiloOEPj5wbDM1HLLRSQdj59ZfH_Mzt-EMRI-bedHPg5" width="20" height="20"></>
-						</button>
-					</td>
-				{else}
-					<td></td>
-				{/if}
 				<td>				
-					{if $u->role != 'admin'}
-						<button class="btn btn-default">Vymazať zákazníka</button>
-					{/if}
+					<a class="btn btn-default" n:href="this, deleteUser => $u->id">Vymazať zákazníka</a>
 				</td>
 			</tr>
+			{/if}
 	    {/foreach}
 	    </tbody>
 	</table>

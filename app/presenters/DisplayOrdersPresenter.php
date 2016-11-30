@@ -6,7 +6,7 @@ use Nette;
 use App\Model;
 
 
-class AdminOrdersPresenter extends BasePresenter
+class DisplayOrdersPresenter extends BasePresenter
 {
 	/** @var Nette\Database\Context */
     private $database;
@@ -29,7 +29,7 @@ class AdminOrdersPresenter extends BasePresenter
 	public function renderDefault($userID = 0, $userName, $orderToHandle = 0)
 	{
 		$this->template->text = "Toto je administratorska stránka";
-        if (!$this->getUser()->isInRole("admin"))
+        if (!$this->getUser()->isInRole("admin") && !$this->getUser()->isInRole("mainAdmin"))
             $this->redirect("Admin:error");
 
         if ($orderToHandle)
@@ -48,11 +48,16 @@ class AdminOrdersPresenter extends BasePresenter
         $this->template->orderManager = $this->orderManager;
 	}
 
+    public function renderMyOrders($userID)
+    {
+        $this->template->orders = $this->orderManager->getOrdersOfUser($userID);
+    }
+
     public function renderError()
     {
         if (!$this->getUser()->isLoggedIn())
             $this->template->message = "Nie si prihlásený";
-        else if (!$this->getUser()->isInRole("admin"))
+        else if (!$this->getUser()->isInRole("admin") && !$this->getUser()->isInRole("mainAdmin"))
             $this->template->message = "Toto je administrátorksa stránka, kam ty nemáš prístup";
         else
             $this->redirect("Admin:default");

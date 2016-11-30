@@ -24,10 +24,10 @@ class AdminPresenter extends BasePresenter
     }
 
 
-	public function renderDefault($page = 1)
+	public function renderDefault($page = 1, $deleteUser = 0, $addAdminRights = 0, $removeAdminRights = 0)
 	{
 		$this->template->text = "Toto je administratorska stránka";
-        if (!$this->getUser()->isInRole("admin"))
+        if (!$this->getUser()->isInRole("admin") && !$this->getUser()->isInRole("mainAdmin"))
             $this->redirect("Admin:error");
 
         $perPage = 10;
@@ -39,14 +39,28 @@ class AdminPresenter extends BasePresenter
 
         $this->template->paginator = $paginator;
 
+        if ($addAdminRights)
+            $this->userManager->addAdminRights($addAdminRights);
+
+        if ($removeAdminRights)
+            $this->userManager->removeAdminRights($removeAdminRights);
+
+        if ($deleteUser)
+            $this->userManager->deleteUser($deleteUser);
+
         $this->template->users = $this->userManager->getUsers($paginator->getLength(), $paginator->getOffset());
 	}
+
+    public function renderMainAdmin($page = 1, $deleteUser = 0, $addAdminRights = 0, $removeAdminRights = 0)
+    {
+        $this->renderDefault($page, $deleteUser, $addAdminRights, $removeAdminRights);
+    }
 
     public function renderError()
     {
         if (!$this->getUser()->isLoggedIn())
             $this->template->message = "Nie si prihlásený";
-        else if (!$this->getUser()->isInRole("admin"))
+        else if (!$this->getUser()->isInRole("admin") && !$this->getUser()->isInRole("mainAdmin"))
             $this->template->message = "Toto je administrátorksa stránka, kam ty nemáš prístup";
         else
             $this->redirect("Admin:default");

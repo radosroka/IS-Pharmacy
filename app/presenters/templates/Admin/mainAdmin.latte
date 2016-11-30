@@ -1,0 +1,54 @@
+{block content}
+
+	<table class="table">
+		<thead>
+		  <tr>
+		  	<th>ID</th>
+		    <th>Zákazník</th>
+		    <th>Email</th>
+		    <th>Práva</th>
+		    <th></th>
+		    <th></th>
+		  </tr>
+		</thead>
+	    <tbody>
+	    {foreach $users as $u}
+	    	{if $u->role != 'mainAdmin'}
+				<tr>
+					<td>{$u->id}</td>
+					{if $u->role != 'admin'}
+						<td><a n:href="AdminOrders:default, userID => $u->id, userName => $u->username" data-toggle="tooltip" title="Zobrazit objednavky">{$u->username}</a></td>
+					{else}
+						<td><p>{$u->username}</p></td>
+					{/if}
+					<td>{$u->email}</td>
+					<td>
+						{if $u->role != 'admin'}
+							<p>&nbsp;user</p>
+						{else}
+							<p>admin</p>
+						{/if}
+					</td>
+					
+					{if $u->role != 'admin'}
+						<td>
+							<a class="btn btn-default" n:href="this, addAdminRights => $u->id" style="background-size: cover; background-color: white; width: 10; height: 10" data-toggle="tooltip" title="Pridat administratorske prava">
+								<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSiqahJQiloOEPj5wbDM1HLLRSQdj59ZfH_Mzt-EMRI-bedHPg5" width="20" height="20"></>
+							</a>
+						</td>
+					{else}
+						<td>
+							<a class="btn btn-default" n:href="this, removeAdminRights => $u->id" style="background-size: cover; background-color: white; width: 10; height: 10" data-toggle="tooltip" title="Odobrat administratorske prava">
+								<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSiqahJQiloOEPj5wbDM1HLLRSQdj59ZfH_Mzt-EMRI-bedHPg5" width="20" height="20"></>
+							</a>
+						</td>
+					{/if}
+					<td>				
+						<a class="btn btn-default" n:href="this, deleteUser => $u->id"  data-toggle="tooltip" title="Pridat zakaznikovi administratorske prava">Vymazať pouzivatela</a>
+					</td>
+				</tr>
+			{/if}
+	    {/foreach}
+	    </tbody>
+	</table>
+{/block}

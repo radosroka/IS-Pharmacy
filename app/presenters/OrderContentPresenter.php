@@ -29,8 +29,10 @@ class OrderContentPresenter extends BasePresenter
 	public function renderDefault($orderID)
 	{
 		$this->template->text = "Toto je administratorska stránka";
-        if (!$this->getUser()->isInRole("admin"))
+        if (!$this->getUser()->isInRole("admin") && !$this->getUser()->isInRole("mainAdmin"))
             $this->redirect("Admin:error");
+
+        $this->template->orderID = $orderID;
 
         $this->template->goods = $this->orderManager->getOrderContent($orderID);
 	}
@@ -39,7 +41,7 @@ class OrderContentPresenter extends BasePresenter
     {
         if (!$this->getUser()->isLoggedIn())
             $this->template->message = "Nie si prihlásený";
-        else if (!$this->getUser()->isInRole("admin"))
+        else if (!$this->getUser()->isInRole("admin") && !$this->getUser()->isInRole("mainAdmin"))
             $this->template->message = "Toto je administrátorksa stránka, kam ty nemáš prístup";
         else
             $this->redirect("Admin:default");
