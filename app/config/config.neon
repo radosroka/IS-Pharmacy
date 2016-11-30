@@ -24,4 +24,5 @@ services:
 	- App\Forms\SignInFormFactory
 	- App\Forms\SignUpFormFactory
 	- App\Forms\OrderFormFactory
+	- App\Forms\AddMedicineFormFactory
 	router: App\RouterFactory::createRouter

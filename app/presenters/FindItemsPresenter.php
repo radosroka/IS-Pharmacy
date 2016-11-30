@@ -18,7 +18,7 @@ class FindItemsPresenter extends BasePresenter
         $this->cartManager = $cartManager;
     }
 
-	public function renderDefault($page = 1, $searchedText, $sukl = "")
+	public function renderDefault($page = 1, $searchedText, $sukl = "", $deleteMedicine = 0)
 	{
         $textToFind = $searchedText;
 
@@ -31,11 +31,19 @@ class FindItemsPresenter extends BasePresenter
         
         $paginator->setPage($page); // the number of the current page (numbered from one)
 
+        if ($deleteMedicine)
+            $this->medicineManager->deleteMedicine($deleteMedicine);
+
         if (!$this->getUser()->isInRole("admin") && !$this->getUser()->isInRole("mainAdmin") && $sukl != "" && $this->getUser()->isLoggedIn()) {
             $this->cartManager->addToCart($sukl, $this->getUser()->id, 1);
         }
 
         $this->template->paginator = $paginator;
         $this->template->medicine = $this->medicineManager->getSeekedItems($textToFind, $paginator->getLength(), $paginator->getOffset());
+    }
+
+    public function renderAdmin($page = 1, $sukl = "", $deleteMedicine = 0)
+    {
+        $this->renderDefault($page, $sukl, $deleteMedicine);
     }
 }

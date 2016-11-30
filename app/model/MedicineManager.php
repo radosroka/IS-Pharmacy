@@ -16,6 +16,16 @@ class MedicineManager
 		$this->database = $database;
 	}
 
+	public function addMedicine($name, $producer, $distributor, $price, $prescription)
+	{
+		$this->database->table('medicine')->insert([
+			"name" => $name,
+			"producer"  => $producer,
+			"distributor" => $distributor,
+			"price" => $price,
+			"prescription" => $prescription
+		]);
+	}
 
 	public function getItemsCount()
 	{
@@ -41,5 +51,10 @@ class MedicineManager
 	{
 		$data = $this->database->query("SELECT * FROM medicine WHERE INSTR(name, ?) > ?", $ref, 0);
 		return $data->getRowCount();
+	}
+
+	public function deleteMedicine($id)
+	{
+		$this->database->query("DELETE FROM medicine WHERE id_sukl = ?", $id);
 	}
 }

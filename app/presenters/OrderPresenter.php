@@ -19,7 +19,7 @@ class OrderPresenter extends BasePresenter
 	protected function createComponentOrderForm()
 	{
 		return $this->orderFactory->create(function () {
-			$this->redirect('Homepage:');
+			$this->redirect('Homepage:admin');
 		});
 	}
 

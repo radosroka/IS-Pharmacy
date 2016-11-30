@@ -49,4 +49,10 @@ class CartManager
 		$this->database->query("UPDATE cart SET ordered=1 WHERE user = ?  AND ordered = 0", $userID);
 		return $data;
 	}
+
+	public function deleteItem($item, $userID)
+	{
+		$cartID = $this->database->table('cart')->where('user = ?', $userID)->where('ordered = 0')->where('medicine = ?', $item)->max('id');
+		$this->database->query("DELETE FROM cart WHERE user = ? AND ordered = 0 AND medicine = ? AND id = ?", $userID, $item, $cartID);
+	}
 }
