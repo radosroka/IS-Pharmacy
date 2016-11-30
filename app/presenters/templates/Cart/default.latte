@@ -5,7 +5,6 @@
 		<tr>
 			<th>SUKL</th>
 			<th>Názov</th>
-			<th>Počet</th>
 			<th>Cena</th>
 			<th></th>
 		</tr>
@@ -15,20 +14,17 @@
 		<tr>
 			<td>{$item->ref("medicine")->id_sukl}</td>
 			<td>{$item->ref("medicine")->name}</td>
-			<td>{$item->count}</td>
 			<td>{$item->ref("medicine")->price} Czk</td>
 			<td>
-				<a style="padding: 5px;" n:href="this"><span style="color: #000;" class="glyphicon">&#x2b;</span></a>
-				<a style="padding: 5px;" n:href="this"><span style="color: #000;" class="glyphicon">&#x2212;</span></a>
-				<a style="padding: 5px;" n:href="this"><span style="color: #000;" class="glyphicon">&#xe014;</span></a>
+				<a class="btn btn-default" n:href="this, deleteItem => $item->medicine">Odobrat</a>
 			</td>
 		</tr>
 		{/foreach}
 		<tr>
 			<td>Súčet</td>
 			<td></td>
-			<td>{$items->sum("count")}</td>
 			<td>{$items->sum("medicine.price * count")} Czk</td>
+			<td></td>
 		</tr>
 	</tbody>
 </table>

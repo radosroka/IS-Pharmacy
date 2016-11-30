@@ -16,11 +16,17 @@ class CartPresenter extends BasePresenter
         $this->cartManager = $cartManager;
     }
 
-	public function renderDefault()
+	public function renderDefault($deleteItem = " ")
 	{
         if (!$this->getUser()->isLoggedIn())
             $this->redirect("Cart:error");
-	   $this->template->items = $this->cartManager->getUserCart($this->getUser()->id);
+
+        $userID = $this->getUser()->id;
+
+        if ($deleteItem != " ")
+            $this->cartManager->deleteItem($deleteItem, $userID);
+
+        $this->template->items = $this->cartManager->getUserCart($userID);
             
     }
 

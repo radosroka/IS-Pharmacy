@@ -17,7 +17,7 @@
 				<tr>
 					<td>{$u->id}</td>
 					{if $u->role != 'admin'}
-						<td><a n:href="AdminOrders:default, userID => $u->id, userName => $u->username" data-toggle="tooltip" title="Zobrazit objednavky">{$u->username}</a></td>
+						<td><a n:href="DisplayOrders:default, userID => $u->id, userName => $u->username" data-toggle="tooltip" title="Zobrazit objednavky">{$u->username}</a></td>
 					{else}
 						<td><p>{$u->username}</p></td>
 					{/if}
