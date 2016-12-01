@@ -14,7 +14,7 @@
 	    	{if $u->role != 'mainAdmin' && $u->role != 'admin'}
 			<tr>
 				<td>{$u->id}</td>
-				<td><a n:href="DisplayOrders:default, userID => $u->id, userName => $u->username" data-toggle="tooltip" title="Zobrazit objednavky">{$u->username}</a></td>
+				<td><a n:href="DisplayOrders:default, userID => $u->id, userName => $u->username" data-toggle="tooltip" title="Zobraziť objednávky">{$u->username}</a></td>
 				<td>{$u->email}</td>
 				<td>				
 					<a class="btn btn-default" n:href="this, deleteUser => $u->id">Vymazať zákazníka</a>

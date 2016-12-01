@@ -33,29 +33,29 @@ class SignUpFormFactory
 	public function create(callable $onSuccess)
 	{
 		$form = $this->factory->create();
-		$form->addText('username', 'Pick a username:')
-			->setRequired('Please pick a username.')
+		$form->addText('username', 'Užívateské meno:')
+			->setRequired('Prosím, vyberte si užívateľské meno.')
 			->setAttribute('class', 'form-control');
 
-		$form->addText('email', 'Your e-mail:')
-			->setRequired('Please enter your e-mail.')
+		$form->addText('email', 'Email:')
+			->setRequired('Prosím, vyberte si email.')
 			->addRule($form::EMAIL)
 			->setAttribute('class', 'form-control');
 
-		$form->addPassword('password', 'Create a password:')
+		$form->addPassword('password', 'Nové heslo:')
 			->setOption('description', sprintf('at least %d characters', self::PASSWORD_MIN_LENGTH))
 			->setRequired('Please create a password.')
 			->addRule($form::MIN_LENGTH, NULL, self::PASSWORD_MIN_LENGTH)
 			->setAttribute('class', 'form-control');
 
-		$form->addSubmit('send', 'Sign up')
+		$form->addSubmit('send', 'Registrovať')
 			 ->setAttribute('class', 'btn btn-default');
 
 		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
 			try {
 				$this->userManager->add($values->username, $values->email, $values->password);
 			} catch (Model\DuplicateNameException $e) {
-				$form->addError('Username is already taken.');
+				$form->addError('Toto meno je už obsadené.');
 				return;
 			}
 			$onSuccess();

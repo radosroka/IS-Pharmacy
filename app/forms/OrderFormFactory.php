@@ -41,23 +41,23 @@ class OrderFormFactory
 	{
 		$form = $this->factory->create();
 
-		$form->addText('name', 'Receivent name:')
-			->setRequired('Please fill receivent.')
+		$form->addText('name', 'Meno príjemcu:')
+			->setRequired('Prosím, vyplňte príjemcu.')
 			->setAttribute('class', 'form-control');
 
-		$form->addText('city', 'City:')
-			->setRequired('Please fill City.')
+		$form->addText('city', 'Mesto:')
+			->setRequired('Prosím vyplňte mesto.')
 			->setAttribute('class', 'form-control');
 
-		$form->addText('street', 'Street:')
-			->setRequired('Please fill street.')
+		$form->addText('street', 'Ulica:')
+			->setRequired('Prosím, vyplňte ulicu.')
 			->setAttribute('class', 'form-control');
 
-		$form->addText('code', 'Postal code:')
-			->setRequired('Please fill postal code.')
+		$form->addText('code', 'Poštový kód:')
+			->setRequired('Prosím, vyplňte poštový kód.')
 			->setAttribute('class', 'form-control');
 
-		$form->addSubmit('submit', 'Submit Order')
+		$form->addSubmit('submit', 'Ododslať objednávku')
 			 ->setAttribute('class', 'btn btn-default');
 
 		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
@@ -72,7 +72,7 @@ class OrderFormFactory
 				$this->orderManager->unlockAddOrder();
 
 			} catch (Model\DuplicateNameException $e) {
-				$form->addError('Error creating order.');
+				$form->addError('Chyba vytvorenia objednávky.');
 				return;
 			}
 			$onSuccess();

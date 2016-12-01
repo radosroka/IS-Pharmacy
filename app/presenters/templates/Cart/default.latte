@@ -16,7 +16,7 @@
 			<td>{$item->ref("medicine")->name}</td>
 			<td>{$item->ref("medicine")->price} Czk</td>
 			<td>
-				<a class="btn btn-default" n:href="this, deleteItem => $item->medicine">Odobrat</a>
+				<a class="btn btn-default" n:href="this, deleteItem => $item->medicine">Odobrať</a>
 			</td>
 		</tr>
 		{/foreach}
@@ -29,6 +29,6 @@
 	</tbody>
 </table>
 
-<a n:href="Order:newOrder">Prejst k objednavke</a>
+<a n:href="Order:newOrder">Prejsť k objednávke</a>
 
 {/block}

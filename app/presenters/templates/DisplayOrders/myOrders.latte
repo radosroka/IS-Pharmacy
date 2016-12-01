@@ -3,21 +3,21 @@
 	<table class="table">
 		<thead>
 		  <tr>
-		  	<th>ID objednavky</th>
-		    <th>Datum</th>
+		  	<th>ID objednávky</th>
+		    <th>Dátum</th>
 		    <th>Stav</th>
 		  </tr>
 		</thead>
 	    <tbody>
 	    {foreach $orders as $o}
 			<tr>
-				<td><a  n:href="OrderContent:default, orderID => $o->id" data-toggle="tooltip" title="Zobrazit obsah ojednavky" style="color: black">{$o->id}</a></td>
+				<td><a  n:href="OrderContent:default, orderID => $o->id" data-toggle="tooltip" title="Zobraziť obsah ojednávky" style="color: black">{$o->id}</a></td>
 				<td>{$o->date}</td>
 				<td>
 					{if !$o->handeled}				
-						<p>Caka na spracovanie</p>
+						<p>Čaká na spracovanie</p>
 					{else}
-						<p>Odoslana</p>
+						<p>Odoslaná</p>
 					{/if}
 				</td>
 			</tr>

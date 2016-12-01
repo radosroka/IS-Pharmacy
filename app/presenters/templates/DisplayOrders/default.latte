@@ -1,26 +1,26 @@
 {block content}
 
-	<h2 style="color: black">pouzivatel: {$userName}</h2>
+	<h2 style="color: black">používateľ: {$userName}</h2>
 	<h4>id: {$userID}</h4>
 
 	<table class="table">
 		<thead>
 		  <tr>
-		  	<th>ID objednavky</th>
-		    <th>Datum</th>
+		  	<th>ID objednávky</th>
+		    <th>Dátum</th>
 		    <th>Stav</th>
 		  </tr>
 		</thead>
 	    <tbody>
 	    {foreach $orders as $o}
 			<tr>
-				<td><a  n:href="OrderContent:default, orderID => $o->id" data-toggle="tooltip" title="Zobrazit obsah ojednavky" style="color: black">{$o->id}</a></td>
+				<td><a  n:href="OrderContent:default, orderID => $o->id" data-toggle="tooltip" title="Zobraziť obsah ojednávky" style="color: black">{$o->id}</a></td>
 				<td>{$o->date}</td>
 				<td>
 					{if !$o->handeled}				
-						<a class="btn btn-default" n:href="this, orderToHandle => $o->id" style="color: red">Vybavit objednavku</a>
+						<a class="btn btn-default" n:href="this, orderToHandle => $o->id" style="color: red">Vybaviť objednávku</a>
 					{else}
-						<p style="color: green">Odoslana</p>
+						<p style="color: green">Odoslaná</p>
 					{/if}
 				</td>
 			</tr>

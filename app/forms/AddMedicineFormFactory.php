@@ -33,32 +33,32 @@ class AddMedicineFormFactory
 	{
 		$form = $this->factory->create();
 
-		$form->addText('name', 'Medicine name:')
-			->setRequired('Please fill name.')
+		$form->addText('name', 'Názov lieku:')
+			->setRequired('Prosím, vyplňte meno.')
 			->setAttribute('class', 'form-control');
 
-		$form->addText('producer', 'Producer:')
-			->setRequired('Please fill producer.')
+		$form->addText('producer', 'Dodávateľ:')
+			->setRequired('Prosím, vyplňte dodávateľa.')
 			->setAttribute('class', 'form-control');
 
-		$form->addText('distributor', 'Distributor:')
-			->setRequired('Please fill distributor.')
+		$form->addText('distributor', 'Distribútor:')
+			->setRequired('Prosím, vyplňte distribútora.')
 			->setAttribute('class', 'form-control');
 
-		$form->addText('price', 'Price:')
-			->setRequired('Please fill price.')
+		$form->addText('price', 'Cena:')
+			->setRequired('Prosím, vyplňte cenu.')
 			->setAttribute('class', 'form-control');
 
-		$form->addCheckbox('prescription', 'Prescription needed?');
+		$form->addCheckbox('prescription', 'Na predpis?');
 
-		$form->addSubmit('submit', 'Add medicine')
+		$form->addSubmit('submit', 'Pridať Liek.')
 			 ->setAttribute('class', 'btn btn-default');
 
 		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
 		try {
 				$this->medicineManager->addMedicine($values->name, $values->producer, $values->distributor, $values->price, $values->prescription);
 			} catch (Model\DuplicateNameException $e) {
-				$form->addError('Error creating order.');
+				$form->addError('Chyba nieje možné pridať liek.');
 				return;
 			}
 			$onSuccess();
