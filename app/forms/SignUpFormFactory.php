@@ -42,7 +42,7 @@ class SignUpFormFactory
 			->addRule($form::EMAIL)
 			->setAttribute('class', 'form-control');
 
-		$form->addPassword('password', 'Nové heslo:')
+		$form->addPassword('password', 'Nové heslo (min. 7 znakov):')
 			->setOption('description', sprintf('at least %d characters', self::PASSWORD_MIN_LENGTH))
 			->setRequired('Please create a password.')
 			->addRule($form::MIN_LENGTH, NULL, self::PASSWORD_MIN_LENGTH)

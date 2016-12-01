@@ -36,7 +36,7 @@ class HomepagePresenter extends BasePresenter
         if ($deleteMedicine)
             $this->medicineManager->deleteMedicine($deleteMedicine);
 
-        if (!$this->getUser()->isInRole("admin") && !$this->getUser()->isInRole("mainAdmin") && $sukl != "" && $this->getUser()->isLoggedIn()) {
+        if (!$this->getUser()->isInRole("employee") && !$this->getUser()->isInRole("mainAdmin") && $sukl != "" && $this->getUser()->isLoggedIn()) {
             $this->cartManager->addToCart($sukl, $this->getUser()->id, 1);
         }
 

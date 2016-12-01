@@ -16,35 +16,35 @@
 	    	{if $u->role != 'mainAdmin'}
 				<tr>
 					<td>{$u->id}</td>
-					{if $u->role != 'admin'}
+					{if $u->role != 'employee'}
 						<td><a n:href="DisplayOrders:default, userID => $u->id, userName => $u->username" data-toggle="tooltip" title="Zobrazit objednavky">{$u->username}</a></td>
 					{else}
 						<td><p>{$u->username}</p></td>
 					{/if}
 					<td>{$u->email}</td>
 					<td>
-						{if $u->role != 'admin'}
+						{if $u->role != 'employee'}
 							<p>&nbsp;user</p>
 						{else}
-							<p>admin</p>
+							<p>employee</p>
 						{/if}
 					</td>
 					
-					{if $u->role != 'admin'}
+					{if $u->role != 'employee'}
 						<td>
-							<a class="btn btn-default" n:href="this, addAdminRights => $u->id" style="background-size: cover; background-color: white; width: 10; height: 10" data-toggle="tooltip" title="Pridať administrátorské práva">
+							<a class="btn btn-default" n:href="this, addAdminRights => $u->id" style="background-size: cover; background-color: white; width: 10; height: 10" data-toggle="tooltip" title="Pridať zamestnanecké práva">
 								<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSiqahJQiloOEPj5wbDM1HLLRSQdj59ZfH_Mzt-EMRI-bedHPg5" width="20" height="20"></>
 							</a>
 						</td>
 					{else}
 						<td>
-							<a class="btn btn-default" n:href="this, removeAdminRights => $u->id" style="background-size: cover; background-color: white; width: 10; height: 10" data-toggle="tooltip" title="Odobrať administrátorské práva">
+							<a class="btn btn-default" n:href="this, removeAdminRights => $u->id" style="background-size: cover; background-color: white; width: 10; height: 10" data-toggle="tooltip" title="Odobrať zamestnanecké práva">
 								<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSiqahJQiloOEPj5wbDM1HLLRSQdj59ZfH_Mzt-EMRI-bedHPg5" width="20" height="20"></>
 							</a>
 						</td>
 					{/if}
 					<td>				
-						<a class="btn btn-default" n:href="this, deleteUser => $u->id"  data-toggle="tooltip" title="Pridať zákaznikovi administrátorske práva">Vymazať používateľa</a>
+						<a class="btn btn-default" n:href="this, deleteUser => $u->id"  data-toggle="tooltip" title="Vymazať používateľa">Vymazať používateľa</a>
 					</td>
 				</tr>
 			{/if}

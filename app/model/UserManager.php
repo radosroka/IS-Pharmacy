@@ -99,7 +99,7 @@ class UserManager implements Nette\Security\IAuthenticator
 
 	public function addAdminRights($userID)
 	{
-		$this->database->query("UPDATE users SET role='admin' WHERE id = ?", $userID);
+		$this->database->query("UPDATE users SET role='employee' WHERE id = ?", $userID);
 	}
 
 	public function removeAdminRights($userID)

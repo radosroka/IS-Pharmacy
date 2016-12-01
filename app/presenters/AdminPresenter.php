@@ -27,7 +27,7 @@ class AdminPresenter extends BasePresenter
 	public function renderDefault($page = 1, $deleteUser = 0, $addAdminRights = 0, $removeAdminRights = 0)
 	{
 		$this->template->text = "Toto je administratorska stránka";
-        if (!$this->getUser()->isInRole("admin") && !$this->getUser()->isInRole("mainAdmin"))
+        if (!$this->getUser()->isInRole("employee") && !$this->getUser()->isInRole("mainAdmin"))
             $this->redirect("Admin:error");
 
         $perPage = 10;
@@ -60,7 +60,7 @@ class AdminPresenter extends BasePresenter
     {
         if (!$this->getUser()->isLoggedIn())
             $this->template->message = "Nie si prihlásený";
-        else if (!$this->getUser()->isInRole("admin") && !$this->getUser()->isInRole("mainAdmin"))
+        else if (!$this->getUser()->isInRole("employee") && !$this->getUser()->isInRole("mainAdmin"))
             $this->template->message = "Toto je administrátorksa stránka, kam ty nemáš prístup";
         else
             $this->redirect("Admin:default");

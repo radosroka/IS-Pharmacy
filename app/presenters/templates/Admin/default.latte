@@ -11,7 +11,7 @@
 		</thead>
 	    <tbody>
 	    {foreach $users as $u}
-	    	{if $u->role != 'mainAdmin' && $u->role != 'admin'}
+	    	{if $u->role != 'mainAdmin' && $u->role != 'employee'}
 			<tr>
 				<td>{$u->id}</td>
 				<td><a n:href="DisplayOrders:default, userID => $u->id, userName => $u->username" data-toggle="tooltip" title="Zobraziť objednávky">{$u->username}</a></td>

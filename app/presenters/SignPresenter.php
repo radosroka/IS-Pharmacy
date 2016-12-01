@@ -21,7 +21,7 @@ class SignPresenter extends BasePresenter
 	 */
 	protected function createComponentSignInForm()
 	{
-		if ($this->getUser()->isInRole("admin") || $this->getUser()->isInRole("mainAdmin")) {
+		if ($this->getUser()->isInRole("employee") || $this->getUser()->isInRole("mainAdmin")) {
 			return $this->signInFactory->create(function () {
 				$this->redirect('Homepage:admin');
 			});

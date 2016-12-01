@@ -40,7 +40,7 @@
             <li class="active"><a n:href="Homepage:default">Domov</a></li>
   					<li><a href="#">O Nás</a></li>
   					<li><a href="#">Kontakt</a></li>
-            {if $user->isInRole("admin")}
+            {if $user->isInRole("employee")}
               <li><a n:href="Admin:default">Používatelia</a></li>
               <li><a n:href="DisplayOrders:default">Objednávky</a></li>
               <li><a n:href="AddMedicine:default">Pridať tovar</a></li>
@@ -67,7 +67,7 @@
 
   					</li>
               {if $user->loggedIn}
-                {if !($user->isInRole("admin")) && !($user->isInRole("mainAdmin"))}
+                {if !($user->isInRole("employee")) && !($user->isInRole("mainAdmin"))}
                   <li><a n:href="Cart:default">Košík</a></li>
                 {/if}
                 <li><a n:href="Sign:out">Odhlásiť: {$user->getIdentity()->username}</a></li>
