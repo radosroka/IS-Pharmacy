@@ -1,0 +1,4 @@
+function printOrder()
+{
+	window.print();
+}
