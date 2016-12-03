@@ -38,8 +38,8 @@
   			<div id="navbar" class="navbar-collapse collapse">
   				<ul class="nav navbar-nav">
             <li class="active"><a n:href="Homepage:default">Domov</a></li>
-  					<li><a href="#">O Nás</a></li>
-  					<li><a href="#">Kontakt</a></li>
+  					<li><a n:href="About:default">O Nás</a></li>
+  					<li><a n:href="Contact:default">Kontakt</a></li>
             {if $user->isInRole("employee")}
               <li><a n:href="Admin:default">Používatelia</a></li>
               <li><a n:href="DisplayOrders:default">Objednávky</a></li>
