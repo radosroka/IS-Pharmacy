@@ -11,6 +11,10 @@ class AddMedicinePresenter extends BasePresenter
 	/** @var Forms\AddMedicineFormFactory @inject */
 	public $addMedicineFactory;
 
+	public function renderDefault() {
+		if (!$this->getUser()->isInRole("employee") && !$this->getUser()->isInRole("mainAdmin"))
+            $this->redirect("Admin:error");
+	}
 
 	/**
 	 * AddMedicine form factory.

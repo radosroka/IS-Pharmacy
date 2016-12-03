@@ -44,6 +44,9 @@ class FindItemsPresenter extends BasePresenter
 
     public function renderAdmin($page = 1, $sukl = "", $deleteMedicine = 0)
     {
-        $this->renderDefault($page, $sukl, $deleteMedicine);
+        if (!$this->getUser()->isInRole("employee") && !$this->getUser()->isInRole("mainAdmin"))
+            $this->redirect("Admin:error");
+        else 
+            $this->renderDefault($page, $sukl, $deleteMedicine);
     }
 }

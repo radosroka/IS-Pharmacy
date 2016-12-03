@@ -96,4 +96,13 @@ class OrderManager
 	{
 		return $this->database->query("SELECT m.*, count(m.name) as count FROM orders o left join cart c on(o.cart_id = c.id) left join medicine m on(c.medicine = m.id_sukl) WHERE o.id = ? GROUP BY m.name", $orderID);
 	}
+
+	public function getUserOfOrder($orderID)
+	{
+		$data = $this->database->query("SELECT c.user FROM orders o left join cart c on(o.cart_id = c.id) WHERE o.id = ?", $orderID);
+
+		foreach ($data as $d) {
+			return $d->user;
+		}
+	}
 }

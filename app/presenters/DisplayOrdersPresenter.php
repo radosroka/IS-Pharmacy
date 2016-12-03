@@ -50,6 +50,9 @@ class DisplayOrdersPresenter extends BasePresenter
 
     public function renderMyOrders($userID)
     {
+        if (!$this->getUser()->isLoggedIn() || $this->getUser()->id != $userID)
+            $this->redirect("DisplayOrders:error");
+
         $this->template->orders = $this->orderManager->getOrdersOfUser($userID);
     }
 
@@ -58,7 +61,7 @@ class DisplayOrdersPresenter extends BasePresenter
         if (!$this->getUser()->isLoggedIn())
             $this->template->message = "Nie si prihlásený";
         else if (!$this->getUser()->isInRole("employee") && !$this->getUser()->isInRole("mainAdmin"))
-            $this->template->message = "Toto je administrátorksa stránka, kam ty nemáš prístup";
+            $this->template->message = "Tu nemáš prístup!";
         else
             $this->redirect("Admin:default");
     }
