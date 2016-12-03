@@ -40,6 +40,11 @@ class HomepagePresenter extends BasePresenter
             $this->cartManager->addToCart($sukl, $this->getUser()->id, 1);
         }
 
+        if ($this->getUser()->isInRole("employee") || $this->getUser()->isInRole("mainAdmin"))
+            $this->template->isCustomer = 0;
+        else
+            $this->template->isCustomer = 1;
+        
         $this->template->paginator = $paginator;
 	    $this->template->medicine = $this->medicineManager->getContent($paginator->getLength(), $paginator->getOffset());
     }

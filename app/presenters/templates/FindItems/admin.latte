@@ -18,9 +18,13 @@
     	<div class="col-sm-4">
             <div><font size="4">{$med->price}</font> Czk</div>
             <div>
-                <a n:href="this, page => $paginator->page, sukl => $med->id_sukl">
-                    <img src="http://simpleicon.com/wp-content/uploads/Shopping-Cart-11-64x64.png" alt="Nákupný košík">
-                </a>
+                {if $isCustomer}
+                    <a n:href="this, page => $paginator->page, sukl => $med->id_sukl">
+                        <img src="http://simpleicon.com/wp-content/uploads/Shopping-Cart-11-64x64.png" alt="Nákupný košík">
+                    </a>
+                {else}
+                    <a n:href="this, page => $paginator->page"></a>
+                {/if}
             </div>
         </div>
         <div>
