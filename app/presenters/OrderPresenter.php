@@ -18,8 +18,11 @@ class OrderPresenter extends BasePresenter
 	 */
 	protected function createComponentOrderForm()
 	{
+		if (!$this->getUser()->isLoggedIn())
+            $this->redirect("Admin:error");
+        
 		return $this->orderFactory->create(function () {
-			$this->redirect('Homepage:admin');
+			$this->redirect('Homepage:default');
 		});
 	}
 
