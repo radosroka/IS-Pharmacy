@@ -59,6 +59,7 @@ class OrderManager
 			"street" => $street,
 			"code" => $code,
 			"handeled" => 0,
+			"disallowed" => 0,
 			"date" => date("Y-m-d H:i:s")
 		]);
 
@@ -82,18 +83,24 @@ class OrderManager
 
 	public function getOrdersOfUser($userID)
 	{
-		return $this->database->query("SELECT o.* FROM orders o left join cart c on (o.cart_id = c.id) WHERE c.user = ? GROUP BY o.id", $userID);
+		return $this->database->query("SELECT o.* FROM orders o left join cart c on (o.cart_id = c.id) WHERE c.user = ? GROUP BY o.id ORDER BY o.handeled", $userID);
 		//return $this->database->query("SELECT * FROM orders");
 	}
 
 	public function getAllOrders()
 	{
-		return $this->database->query("SELECT * FROM orders GROUP BY id");
+		return $this->database->query("SELECT * FROM orders GROUP BY id ORDER BY handeled");
 	}
 
 	public function handleOrder($id)
 	{
 		$this->database->query("UPDATE orders SET handeled=1 WHERE id = ?", $id);
+		return 1;
+	}
+
+	public function disallowOrder($id)
+	{
+		$this->database->query("UPDATE orders SET handeled=1, disallowed=1 WHERE id = ?", $id);
 		return 1;
 	}
 

@@ -18,9 +18,12 @@
 				<td>{$o->date}</td>
 				<td>
 					{if !$o->handeled}				
-						<a class="btn btn-default" n:href="this, orderToHandle => $o->id" style="color: red">Vybaviť objednávku</a>
+						<a class="btn btn-default" n:href="this, orderToHandle => $o->id" style="color: green">Povoliť objednávku</a>
+						<a class="btn btn-default" n:href="this, orderToDisallow => $o->id" style="color: red">Zamietnuť objednávku</a>
+					{elseif $o->disallowed}
+						<p>Zamietnutá</p>
 					{else}
-						<p style="color: green">Odoslaná</p>
+						<p>Odoslaná</p>
 					{/if}
 				</td>
 			</tr>

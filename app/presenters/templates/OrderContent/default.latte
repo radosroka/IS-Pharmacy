@@ -16,7 +16,11 @@
 	    {foreach $goods as $g}
 			<tr>
 				<td><p style="color: black">{$g->id_sukl}</p></td>
-				<td><p style="color: black">{$g->name}</p></td>
+				{if $g->prescription}
+					<td><p style="color: black">{$g->name}:<font style="color: red"> Potrebný predpis</font></p></td>
+				{else}
+					<td><p style="color: black">{$g->name}</p></td>
+				{/if}
 				<td><p style="color: black">{$g->producer}</p></td>
 				<td><p style="color: black">{$g->price}</p></td>
 				<td><p style="color: black">{$g->count}</p></td>

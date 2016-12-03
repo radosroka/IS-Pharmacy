@@ -1,5 +1,7 @@
 {block content}
 
+<div align="center">Ak objednávka obsahuje liečivá, ku ktorým je potrebný predpis, je potrebné tento predpis priložiť pri vyplňovaní objednávky. V opačnom prípade nebude objednávka akceptovaná.</div>
+
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -13,7 +15,11 @@
 		{foreach $items as $item}
 		<tr>
 			<td>{$item->ref("medicine")->id_sukl}</td>
-			<td>{$item->ref("medicine")->name}</td>
+			{if $item->ref("medicine")->prescription}
+                <td>{$item->ref("medicine")->name} :<font size="4"> Na predpis!</font></td>
+            {else}
+            	<td>{$item->ref("medicine")->name}</td>
+            {/if}
 			<td>{$item->ref("medicine")->price} Czk</td>
 			<td>
 				<a class="btn btn-default" n:href="this, deleteItem => $item->medicine">Odobrať</a>

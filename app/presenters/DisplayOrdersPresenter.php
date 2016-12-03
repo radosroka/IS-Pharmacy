@@ -26,7 +26,7 @@ class DisplayOrdersPresenter extends BasePresenter
         $this->orderManager = $orderManager;
     }
 
-	public function renderDefault($userID = 0, $userName, $orderToHandle = 0)
+	public function renderDefault($userID = 0, $userName, $orderToHandle = 0, $orderToDisallow)
 	{
 		$this->template->text = "Toto je administratorska stránka";
         if (!$this->getUser()->isInRole("employee") && !$this->getUser()->isInRole("mainAdmin"))
@@ -34,6 +34,9 @@ class DisplayOrdersPresenter extends BasePresenter
 
         if ($orderToHandle)
             $this->orderManager->handleOrder($orderToHandle);
+        elseif ($orderToDisallow) {
+            $this->orderManager->disallowOrder($orderToDisallow);
+        }
 
         if ($userID != 0) {
             $this->template->orders = $this->orderManager->getOrdersOfUser($userID);
@@ -41,7 +44,7 @@ class DisplayOrdersPresenter extends BasePresenter
             $this->template->userID = $userID;
         } else {
             $this->template->orders = $this->orderManager->getAllOrders();
-            $this->template->userName = "Vsetci";
+            $this->template->userName = "Všetci";
             $this->template->userID = "***";
         }
 

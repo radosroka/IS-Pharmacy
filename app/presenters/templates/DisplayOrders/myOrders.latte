@@ -16,6 +16,8 @@
 				<td>
 					{if !$o->handeled}				
 						<p>Čaká na spracovanie</p>
+					{elseif $o->disallowed}
+						<p style="color: red">Zamietnutá (neplatný alebo chýbajúci predpis!)</p>
 					{else}
 						<p>Odoslaná</p>
 					{/if}

@@ -9,7 +9,11 @@
     	</div>
     	<div class="col-sm-4">
     		<b>{$med->name}</b>
-    		<figcaption>{$med->id_sukl}</figcaption>
+    		{if $med->prescription}
+                <figcaption>{$med->id_sukl} : Potrebný predpis!</figcaption>
+            {else}
+                <figcaption>{$med->id_sukl}</figcaption>
+            {/if}
     	</div>
     	<div class="col-sm-4">
             <div><font size="4">{$med->price}</font> Czk</div>

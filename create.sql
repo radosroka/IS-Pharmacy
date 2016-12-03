@@ -140,6 +140,7 @@ CREATE TABLE `orders` (
   `street` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `code` int(5) NOT NULL,
   `handeled` bit(1) NOT NULL,
+  `disallowed` bit(1) NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY (`id`,`cart_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
