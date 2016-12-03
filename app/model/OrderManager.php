@@ -26,7 +26,7 @@ class OrderManager
 
 	public function lockAddOrder()
 	{
-		$this->database->query("LOCK TABLES orders_auto_increment WRITE, orders WRITE");
+		$this->database->query("LOCK TABLES orders_auto_increment WRITE, orders WRITE, prescription WRITE");
 		$this->database->table('orders_auto_increment')->insert([
 			"value" => 1
 			]);
@@ -45,7 +45,7 @@ class OrderManager
 	 * @param  integer
 	 * @return void
 	 */
-	public function addOrder($cartID, $name, $city, $street, $code)
+	public function addOrder($cartID, $name, $city, $street, $code, $img)
 	{
 		//$id = $this->database->query("SELECT MAX(id) FROM orders_auto_increment");
 		$id = $this->database->table('orders_auto_increment')->max('id');
@@ -61,6 +61,16 @@ class OrderManager
 			"handeled" => 0,
 			"date" => date("Y-m-d H:i:s")
 		]);
+
+		$this->database->table("prescription")->insert([
+			"id" => $id,
+			"image" => $img
+		]);
+	}
+
+	public function getImg($id)
+	{
+		return $this->database->table('prescription')->where('id = ?', $id)[0]->image;
 	}
 
 	public function isHandeled($id)
