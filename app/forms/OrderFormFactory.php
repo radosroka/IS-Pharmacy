@@ -58,11 +58,11 @@ class OrderFormFactory
 			->setAttribute('class', 'form-control');
 
 		$form->addUpload('prescription', 'Predpis:')
-    		->setRequired(TRUE) // optional
+    		->setRequired(FALSE) // optional
     		->addRule(Form::IMAGE, 'Thubnail must be JPEG, PNG or GIF')
     		->addRule(Form::MAX_FILE_SIZE, 'Maximum file size is 64 kB.', 64 * 1024 * 1000 /* v bytech */);
 
-		$form->addSubmit('submit', 'Ododslať objednávku')
+		$form->addSubmit('submit', 'Odoslať objednávku')
 			 ->setAttribute('class', 'btn btn-default');
 
 		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
@@ -80,11 +80,15 @@ class OrderFormFactory
 	    			$file_name = uniqid(rand(0,20), TRUE).$file_ext;
 	    			// přesunutí souboru z temp složky někam, kam nahráváš soubory
 	    			$file->move("images/uploads/" . $file_name);
+	    			$file_name = "images/uploads/" . $file_name;
+    			}
+    			else {
+    				$file_name = "";
     			}
 
 				$this->orderManager->lockAddOrder();
 				foreach ($cartIDs as $cartID) {
-					$this->orderManager->addOrder($cartID->id, $values->name, $values->city, $values->street, $values->code, "images/uploads/" . $file_name);
+					$this->orderManager->addOrder($cartID->id, $values->name, $values->city, $values->street, $values->code, $file_name);
 				}
 				$this->orderManager->unlockAddOrder();
 

@@ -33,6 +33,7 @@ class OrderContentPresenter extends BasePresenter
             $this->redirect("OrdersContent:error");
 
         $this->template->orderID = $orderID;
+        $this->template->img = $this->orderManager->getImg($orderID);
 
         $this->template->goods = $this->orderManager->getOrderContent($orderID);
 	}

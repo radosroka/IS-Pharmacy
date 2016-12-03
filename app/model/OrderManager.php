@@ -68,6 +68,11 @@ class OrderManager
 		]);
 	}
 
+	public function getImg($id)
+	{
+		return $this->database->table('prescription')->where('id = ?', $id)[0]->image;
+	}
+
 	public function isHandeled($id)
 	{
 		$data = $this->database->query("SELECT handeled FROM orders WHERE id = ?", $id);
