@@ -57,6 +57,11 @@ class OrderFormFactory
 			->setRequired('Prosím, vyplňte poštový kód.')
 			->setAttribute('class', 'form-control');
 
+		$form->addUpload('prescription', 'Predpis:')
+    		->setRequired(TRUE) // optional
+    		->addRule(Form::IMAGE, 'Thubnail must be JPEG, PNG or GIF')
+    		->addRule(Form::MAX_FILE_SIZE, 'Maximum file size is 64 kB.', 64 * 1024 * 1000 /* v bytech */);
+
 		$form->addSubmit('submit', 'Ododslať objednávku')
 			 ->setAttribute('class', 'btn btn-default');
 
@@ -65,9 +70,21 @@ class OrderFormFactory
 				$userID = $this->user->id;
 				$cartIDs = $this->cartManager->getCartIdOfUser($userID);
 
+
+				$file = $values->prescription;
+  				// kontrola jestli se jedná o obrázek a jestli se nahrál dobře
+  				if($file->isImage() and $file->isOk()) {
+	   				// oddělení přípony pro účel změnit název souboru na co chceš se zachováním přípony
+	    			$file_ext=strtolower(mb_substr($file->getSanitizedName(), strrpos($file->getSanitizedName(), ".")));
+	    			// vygenerování náhodného řetězce znaků, můžeš použít i \Nette\Strings::random()
+	    			$file_name = uniqid(rand(0,20), TRUE).$file_ext;
+	    			// přesunutí souboru z temp složky někam, kam nahráváš soubory
+	    			$file->move("images/uploads/" . $file_name);
+    			}
+
 				$this->orderManager->lockAddOrder();
 				foreach ($cartIDs as $cartID) {
-					$this->orderManager->addOrder($cartID->id, $values->name, $values->city, $values->street, $values->code);
+					$this->orderManager->addOrder($cartID->id, $values->name, $values->city, $values->street, $values->code, "images/uploads/" . $file_name);
 				}
 				$this->orderManager->unlockAddOrder();
 
