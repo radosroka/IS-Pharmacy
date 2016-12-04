@@ -117,4 +117,13 @@ class OrderManager
 			return $d->user;
 		}
 	}
+
+	public function getSum($orderID)
+	{
+		$data = $this->database->query("SELECT SUM(m.price) as sumary FROM orders o left join cart c on(o.cart_id = c.id) left join medicine m on(c.medicine = m.id_sukl) WHERE o.id = ?", $orderID);
+
+		foreach ($data as $d) {
+			return $d->sumary;
+		}
+	}
 }

@@ -22,10 +22,17 @@
 					<td><p style="color: black">{$g->name}</p></td>
 				{/if}
 				<td><p style="color: black">{$g->producer}</p></td>
-				<td><p style="color: black">{$g->price}</p></td>
+				<td><p style="color: black">{$g->price} Czk</p></td>
 				<td><p style="color: black">{$g->count}</p></td>
 			</tr>
 	    {/foreach}
+    	<tr>
+    		<td>Súčet</td>
+    		<td></td>
+    		<td></td>
+    		<td>{$sum} Czk</td>
+    		<td></td>
+    	</tr>
 	    </tbody>
 	</table>
 

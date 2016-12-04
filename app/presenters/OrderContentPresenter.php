@@ -37,6 +37,7 @@ class OrderContentPresenter extends BasePresenter
 
         $this->template->orderID = $orderID;
         $this->template->img = $this->orderManager->getImg($orderID);
+        $this->template->sum = $this->orderManager->getSum($orderID);
 
         $this->template->goods = $this->orderManager->getOrderContent($orderID);
 	}
