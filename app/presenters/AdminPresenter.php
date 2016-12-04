@@ -40,10 +40,8 @@ class AdminPresenter extends BasePresenter
 
         if ($addAdminRights)
             $this->userManager->addAdminRights($addAdminRights);
-
         if ($removeAdminRights)
             $this->userManager->removeAdminRights($removeAdminRights);
-
         if ($deleteUser)
             $this->userManager->deleteUser($deleteUser);
 
