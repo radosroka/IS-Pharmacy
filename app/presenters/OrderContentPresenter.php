@@ -31,7 +31,7 @@ class OrderContentPresenter extends BasePresenter
         $userID = $this->orderManager->getUserOfOrder($orderID);
         if (!$this->getUser()->isLoggedIn() && !$this->getUser()->isInRole("employee") && !$this->getUser()->isInRole("mainAdmin"))
             $this->redirect("Admin:error");
-        elseif ($this->getUser()->id != $userID) {
+        elseif ($this->getUser()->id != $userID && !$this->getUser()->isInRole("employee") && !$this->getUser()->isInRole("mainAdmin")) {
             $this->redirect("OrderContent:error");
         }
 
